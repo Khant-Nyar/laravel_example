@@ -14,15 +14,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::query();
+        $users = User::query();
 
         if ($request->ajax()) {
-            dd($data);
-            return datatables($data)
-
-                ->addColumn("row_count", function ($data) {
-                    return view(random_int(0, 20));
-                })
+            return datatables()->of($users)
                 ->editColumn("name", function ($data) {
                     return Str::limit($data->name, 6, '###');
                 })
@@ -32,10 +27,9 @@ class UserController extends Controller
                 ->editColumn('updated_at', function ($data) {
                     return Carbon::parse($data->updated_at);
                 })
-                ->rawColumns(['row_count', 'id', 'name', 'email', 'created_at', 'updated_at'])
+                ->rawColumns(['name', 'email', 'created_at', 'updated_at'])
                 ->toJson();
         }
-
 
         return view('admin.pages.users.index');
     }

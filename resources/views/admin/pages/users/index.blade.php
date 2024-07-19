@@ -18,7 +18,6 @@
                     <table class="table-bordered table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Create At</th>
@@ -26,9 +25,10 @@
                                 {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
+                        <tbody>
+                        </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Create At</th>
@@ -49,40 +49,60 @@
         <script src="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        <script>
-            $(document).ready(function() {
-                console.log("{{ route('user.index') }}")
-                let table = $('#datatable').DataTable({
+        <script defer>
+            $(function() {
+                var table = $('#dataTable').DataTable({
+                    processing: true,
                     serverSide: true,
-                    responsive: true,
                     ajax: "{{ route('user.index') }}",
                     columns: [{
-                            data: 'row_count',
-                            name: 'row_count',
-                        },
-                        {
                             data: 'name',
-                            name: 'name',
+                            name: 'name'
                         },
                         {
                             data: 'email',
-                            name: 'email',
+                            name: 'email'
                         },
                         {
                             data: 'created_at',
-                            name: 'created_at',
+                            name: 'created_at'
                         },
                         {
                             data: 'updated_at',
-                            name: 'updated_at',
+                            name: 'updated_at'
                         },
-                        // {
-                        //     data: 'action',
-                        //     name: 'action',
-                        // },
                     ],
                 });
             });
+            // $(document).ready(function() {
+            //     console.log("{{ route('user.index') }}")
+            //     let table = $('#datatable').DataTable({
+            //         serverSide: true,
+            //         responsive: true,
+            //         ajax: "{{ route('user.index') }}",
+            //         columns: [{
+            //                 data: 'row_count',
+            //                 name: 'row_count'
+            //             },
+            //             {
+            //                 data: 'name',
+            //                 name: 'name'
+            //             },
+            //             {
+            //                 data: 'email',
+            //                 name: 'email'
+            //             },
+            //             {
+            //                 data: 'created_at',
+            //                 name: 'created_at'
+            //             },
+            //             {
+            //                 data: 'updated_at',
+            //                 name: 'updated_at'
+            //             },
+            //         ],
+            //     });
+            // });
         </script>
     @endpush
 </x-admin>
