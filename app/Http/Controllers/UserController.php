@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -27,7 +29,13 @@ class UserController extends Controller
                 ->editColumn('updated_at', function ($data) {
                     return Carbon::parse($data->updated_at);
                 })
-                ->rawColumns(['name', 'email', 'created_at', 'updated_at'])
+                ->addColumn('action', function ($data) {
+                    $editBtn = '<a href="#" class="btn btn-warning">Edit</a>';
+                    $deleteBtn = '<a href="#" class="btn btn-danger">Delete</a>';
+
+                    return '<div class="mx-3">' . $editBtn . $deleteBtn . '</div>';
+                })
+                ->rawColumns(['name', 'email', 'created_at', 'updated_at', 'action'])
                 ->toJson();
         }
 
@@ -39,15 +47,21 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+
+        $data = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        dd($data->toArray());
     }
 
     /**

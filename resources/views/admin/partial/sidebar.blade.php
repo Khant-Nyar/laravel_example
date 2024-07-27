@@ -37,7 +37,7 @@
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">manage user:</h6>
                 <a class="collapse-item" href="{{ route('user.index') }}">list of users</a>
-                <a class="collapse-item" href="#">create a user</a>
+                <a class="collapse-item" href="{{ route('user.create') }}">create a user</a>
             </div>
         </div>
     </li>

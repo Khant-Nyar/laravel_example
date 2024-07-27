@@ -22,7 +22,7 @@
                                 <th>Email</th>
                                 <th>Create At</th>
                                 <th>Update At</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                                 <th>Email</th>
                                 <th>Create At</th>
                                 <th>Update At</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Action</th>
                             </tr>
                         </tfoot>
 
@@ -49,6 +49,7 @@
         <script src="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
+
         <script defer>
             $(function() {
                 var table = $('#dataTable').DataTable({
@@ -61,7 +62,7 @@
                         },
                         {
                             data: 'email',
-                            name: 'email'
+                            name: 'email',
                         },
                         {
                             data: 'created_at',
@@ -71,6 +72,11 @@
                             data: 'updated_at',
                             name: 'updated_at'
                         },
+                        {
+                            data: 'action',
+                            name: 'action'
+                        },
+
                     ],
                 });
             });
